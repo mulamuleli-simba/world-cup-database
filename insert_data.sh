@@ -16,7 +16,7 @@ do
   # ADD WINNER TEAM
   if [[ $WINNER != "winner" ]]
   then
-    WINNER_TEAM_NAME = $($PQSL "SELECT name FROM teams WHERE name='$WINNER'")
+    WINNER_TEAM_NAME=$($PQSL "SELECT name FROM teams WHERE name='$WINNER'")
     if [[ -z $WINNER_TEAM_NAME ]]
       then
         echo "$($PSQL "INSERT INTO teams(name) VALUES('$WINNER')")"
@@ -25,7 +25,7 @@ do
   # ADD OPPONENT TEAM
   if [[ $OPPONENT != "opponent" ]]
   then
-    OPPONENT_TEAM_NAME = $($PQSL "SELECT name FROM teams WHERE name='$OPPONENT'")
+    OPPONENT_TEAM_NAME=$($PQSL "SELECT name FROM teams WHERE name='$OPPONENT'")
     if [[ -z $OPPONENT_TEAM_NAME ]]
       then
         echo "$($PSQL "INSERT INTO teams(name) VALUES('$OPPONENT')")"
@@ -35,8 +35,8 @@ do
   #ADD GAMES
   if [[ $YEAR != "year" ]]
   then
-    WINNER_ID = $($PSQL "SELECT team_id FROM teams WHERE name='$WINNER'")
-    OPPONENT_ID = $($PSQL "SELECT team_id FROM teams WHERE name='$OPPONENT'")
+    WINNER_ID=$($PSQL "SELECT team_id FROM teams WHERE name='$WINNER'")
+    OPPONENT_ID=$($PSQL "SELECT team_id FROM teams WHERE name='$OPPONENT'")
     echo "$($PSQL "INSERT INTO games(year, round, winner_id, opponent_id, winner_goals, opponent_goals) VALUES($YEAR,'$ROUND',$WINNER_ID,$OPPONENT_ID, $WINNER_GOALS, $OPPONENT_GOALS)")"
   fi
 done
